@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recordings</title>
+        <meta charset="UTF-8">
+        
+    </head>
+
+    <body>
+        <h1>Create a Recording</h1>
+        <form class="creation" action="/upload/create/" method='POST'>
+            <label for ="trolley_name">Trolley:</label>
+            <input type="text" id="trolley_name" name="tname"><br>
+
+            <label for="trolley_date">Date & Time:</label>
+            <!--<input type="datetime-local" id="trolley_date" name="tdate"><br> #nosupported in ff browser-->
+            <input type="date" id="trolley_date" name="tdate"><input type="time" name="ttime"> (HH:MM AM/PM)<br>
+            <label for="trolley_temp">Temperature:</label>
+            <input type="text" id ="trolley_temp" name ="ttemp"><br>
+            <button type="submit" value="Record" id="submit">Record</button>
+        </form>
+
+        <hr>
+        <h1>Upload a Recording</h1>
+        <form action="/upload/" enctype="multipart/form-data" accept=".csv" method="POST">
+            <input type ="file" name="csvfile">
+            <button type="submit" value="Upload" id="submit">Upload</button>
+        </form>
+        <hr>
+        <h1>Recordings</h1>
+        <table border='1'>
+            <th>Trolley</th>
+            <th>Date & Time</th>
+            <th>Temperature</th>
+            {% for item in recordings %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.temp}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </body>
+</html>
